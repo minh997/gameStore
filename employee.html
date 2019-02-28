@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>TEST</title>
+    <meta charset="utf-8">
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="image/favicon.ico" type="image/x-icon"> 
+    
+   
+    <script>
+    
+    //send request to server, get data in JSON format, display it in class productTable 
+    function ajaxProcess(ajax){
+        ajax.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            var data = JSON.parse(this.responseText);
+            console.log(data);
+
+            let html = "";
+
+            if(data.length == 0){
+                html = "Find 0 result";
+                return;
+            }
+
+            for (let i = 0;i< data.length;i++){
+                let PID = data[i].PID;
+                let PName = data[i].PName;
+                let Price = data[i].Price;
+                
+
+            //display for each product
+            html += 
+                "<div class = \"productBox\" "+
+                "<figure>"+
+                    "<img src = \"img/" + PID + ".jpg\" class = \"image\" >"+
+                    "<figcaption>" + PName + "<br>" + Price +"</figcaption>"+
+
+                "</figure>" + 
+
+                "</div>"
+
+            }
+            document.getElementById("productTable").innerHTML = html;
+        }
+
+    }
+    }
+    
+    function display(){
+        let ajax = new XMLHttpRequest();
+        let method = "GET";
+        let url = "php/showEmployee.php";//php code
+        let async = true; 
+        
+        
+        ajax.open(method, url, async);
+        ajaxProcess(ajax);
+        ajax.send();
+        
+
+        
+
+    }
+        
+    function search(){
+         
+        let PName = document.getElementById("PName").value;
+        let productDisplay = document.getElementById("productTable");
+        productDisplay.innerHTML = "Find 0 result";
+        
+        
+        let ajax = new XMLHttpRequest();
+        let method = "GET";
+        let url = "showEmployee.php?PName="+PName;//php code
+        let async = true;   
+        
+        ajaxProcess(ajax);
+        
+        ajax.open(method, url, async);
+        ajax.send();
+    }
+
+    </script>
+    
+</head>
+
+<body>
+    
+    <div class="banner"></div>
+    
+    
+    
+    
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark sticky-top">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="employee.html">Employee</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Order</a>
+        </li>
+      </ul>
+    </nav>
+    
+    
+    <div id="displayEmployee">
+        
+    
+    </div>
+    
+    
+    
+<footer>
+ 	<strong>Social Media</strong><br><br>
+ 	<a href="https://www.facebook.com" id="facebook"><i class="fa fa-facebook-square"></i> Facebook</a>
+ 	<a href="https://twitter.com" id="twitter"><i class="fa fa-twitter-square"></i> Twitter</a>
+ 	<a href="index.html" id="homepage"><i class="fa fa-home"></i> Home Page</a>
+    <a href="https://www.instagram.com" id="instagram"><i class="fa fa-instagram"></i> Instagram</a>
+</footer>
+</body>
+</html>
