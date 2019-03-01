@@ -43,7 +43,7 @@
                 let Publisher = data[i].Publisher;
                 let ReleaseDate = data[i].ReleaseDate;
                 
-
+                
             
             html += 
             "<tr>"+
@@ -52,10 +52,31 @@
                 "<td>"+Price+"</td>"+
                 "<td>"+ReleaseDate+"</td>"+
                 "<td>"+Publisher+"</td>"+
-                "<td><button type=\"button\" class=\"btn btn-primary\">Update</button></td>"+
+                "<td><button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#"+"m"+PID +"\">Update</button<td>"+
                 "<td><button type=\"button\" class=\"btn btn-danger\">Delete</button></td>"+
-            "</tr>";
+            "</tr>"+
             
+            /*each model habe ID = m+PID by default*/
+            "<div class=\"modal fade\" id=\""+"m"+PID+"\" tabindex=\"-1\" role=\"dialog\"  aria-hidden=\"true\">"+
+                "<div class=\"modal-dialog\" role=\"document\">"+
+                    "<div class=\"modal-content\">"+
+                        "<div class=\"modal-header\">"+
+                            "<h5 class=\"modal-title\" id=\"exampleModalLabel\">Update for "+PName+"</h5>"+
+                            "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">"+
+                            "<span aria-hidden=\"true\">&times;</span>"+       
+                            "</button>"+
+                            "</div>"+
+                            "<div class=\"modal-body\">"+
+                            "<form>"+
+                                "<input type=\"number\" class=\"form-control my-3\" placeholder=\"Enter new Price\" name=\"Price\">"+
+                                "<input type=\"date\" class=\"form-control my-3\" placeholder=\"Enter new date\" name=\"ReleaseDate\">"+
+                                "<input type=\"text\" class=\"form-control my-3\" placeholder=\"Enter new Publisher\" name=\"Publisher\">"+
+                                "<input type=\"button\" class=\"btn btn-primary my-3\" onclick=\"update(\""+PID+"\")\" value=\"submit\">"+          
+                            "</form>"+
+                        "</div>" +   
+                    "</div>"+
+                "</div>"+
+            "</div>";
             
             
             
@@ -81,6 +102,14 @@
 
         
 
+    }
+        
+    function update(ID){
+        /*let ReleaseDate = document.getElementsByName("ReleaseDate").value;*/
+        let Price = document.getElementById(ID);
+        
+        //console.log(Price);
+         
     }
 
     </script>
@@ -122,23 +151,19 @@
         </thead>
         <tbody id = "productControl">
             <script>display()</script>
-            
-            
-            
-            
         </tbody>
     </table>
     
     
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Update</button>
     
     
     
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    
+<div class="modal fade" id="m88" tabindex="-1" role="dialog"  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update for PID</h5>
+        <h5 class="modal-title">Update for PID</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -148,7 +173,7 @@
               <input type="number" class="form-control my-3" placeholder="Enter new Price">
               <input type="date" class="form-control my-3" placeholder="Enter new date">
               <input type="number" class="form-control my-3" placeholder="Enter new Publisher">
-              <input type="submit" class="btn btn-primary my-3">
+              <input type="button" class="btn btn-primary my-3" onclick="update()">
           </form>
       </div>
     </div>
