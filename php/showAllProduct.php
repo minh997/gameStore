@@ -21,7 +21,7 @@ if ($conn->connect_error){
 
 
 $query = "SELECT product_stock.PID, product_details.PName, product_details.ReleaseDate,
-product_details.Price
+product_details.Price, product_details.Publisher
 FROM product_stock
 INNER JOIN product_details
 ON product_stock.PName=product_details.PName";
