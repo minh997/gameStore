@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    margin: 5px;
 }
 
 
@@ -56,8 +55,6 @@ html {height: 100%;}
 
 
 
-
-
 /* PRODUCT TABLE END*/
 
 
@@ -70,8 +67,6 @@ html {height: 100%;}
     background-size: cover; 
     height: 30%;
     position: relative;
-    margin-right: 10px;
-    margin-left: 10px;
 }
 
 

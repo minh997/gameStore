@@ -23,8 +23,8 @@
     <script>
     
     //send request to server, get data in JSON format, display it in class productTable 
-    function ajaxProcess(ajax){
-        ajax.onreadystatechange = function(){
+    function ajaxProcess(ajax) {
+        ajax.onreadystatechange = function ( ){
         if(this.readyState == 4 && this.status == 200){
             var data = JSON.parse(this.responseText);
             console.log(data);
@@ -42,7 +42,7 @@
                 let Price = data[i].Price;
                 let Publisher = data[i].Publisher;
                 let ReleaseDate = data[i].ReleaseDate;
-                
+                let Quantity = data[i].Quantity;
                 
             
             html += 
@@ -52,6 +52,7 @@
                 "<td>"+Price+"</td>"+
                 "<td>"+ReleaseDate+"</td>"+
                 "<td>"+Publisher+"</td>"+
+                "<td>"+Quantity+"</td>"+
                 "<td><button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#"+"m"+PID +"\">Update</button<td>"+
                 "<td><button type=\"button\" class=\"btn btn-danger\">Delete</button></td>"+
             "</tr>"+
@@ -61,7 +62,7 @@
                 "<div class=\"modal-dialog\" role=\"document\">"+
                     "<div class=\"modal-content\">"+
                         "<div class=\"modal-header\">"+
-                            "<h5 class=\"modal-title\" id=\"exampleModalLabel\">Update for "+PName+"</h5>"+
+                            "<h5 class=\"modal-title\" id=\"exampleModalLabel\">"+PName+"</h5>"+
                             "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">"+
                             "<span aria-hidden=\"true\">&times;</span>"+       
                             "</button>"+
@@ -71,7 +72,8 @@
                                 "<input type=\"number\" class=\"form-control my-3\" placeholder=\"Enter new Price\" name=\"Price\">"+
                                 "<input type=\"date\" class=\"form-control my-3\" placeholder=\"Enter new date\" name=\"ReleaseDate\">"+
                                 "<input type=\"text\" class=\"form-control my-3\" placeholder=\"Enter new Publisher\" name=\"Publisher\">"+
-                                "<input type=\"button\" class=\"btn btn-primary my-3\" onclick=\"update(\""+PID+"\")\" value=\"submit\">"+          
+                                "<input type=\"number\" class=\"form-control my-3\" placeholder=\"Enter new Quantity\" name=\"Quantity\">"+
+                                "<input type=\"button\" class=\"btn btn-primary my-3\" onclick=update(\""+"m"+PID+"\") value=\"submit\">"+          
                             "</form>"+
                         "</div>" +   
                     "</div>"+
@@ -98,18 +100,37 @@
         ajax.open(method, url, async);
         ajaxProcess(ajax);
         ajax.send();
-        
-
-        
-
+    
     }
         
     function update(ID){
-        /*let ReleaseDate = document.getElementsByName("ReleaseDate").value;*/
-        let Price = document.getElementById(ID);
+        let Price = document.getElementById(ID).getElementsByTagName("input")[0].value;
+        let ReleaseDate = document.getElementById(ID).getElementsByTagName("input")[1].value;
+        let Publisher = document.getElementById(ID).getElementsByTagName("input")[2].value;
+        let Quantity = document.getElementById(ID).getElementsByTagName("input")[3].value;
+        let PName = document.getElementById(ID).getElementsByTagName("h5")[0].innerHTML;
         
-        //console.log(Price);
-         
+       
+        //string contain 3 args will be passed to backend
+        let args = "?"+"Price="+Price+"&ReleaseDate="+ReleaseDate+"&Publisher="+Publisher+"&Quantity="+Quantity;
+        
+        
+        
+        let ajax = new XMLHttpRequest();
+        let method = "GET";
+        let url = "php/update.php"+args;//php code
+        let async = true; 
+        
+        ajax.open(method, url, async);
+        ajax.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                var data = this.responseText;
+                console.log(data);
+
+            }
+        
+        }
+        ajax.send();
     }
 
     </script>
@@ -145,6 +166,7 @@
                 <th scope="col">Price</th>
                 <th scope="col">Release Date</th>
                 <th scope="col">Publisher</th>
+                <th scope="col">Quantity</th>
                 <th scope="col">Update</th>
                 <th scope="col">Remove</th>
             </tr>
@@ -159,27 +181,7 @@
     
     
     
-<div class="modal fade" id="m88" tabindex="-1" role="dialog"  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Update for PID</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <form action="php/update.php" method="post">
-              <input type="number" class="form-control my-3" placeholder="Enter new Price">
-              <input type="date" class="form-control my-3" placeholder="Enter new date">
-              <input type="number" class="form-control my-3" placeholder="Enter new Publisher">
-              <input type="button" class="btn btn-primary my-3" onclick="update()">
-          </form>
-      </div>
-    </div>
-  </div>
-</div>
-    
+
     
 <footer>
  	

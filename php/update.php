@@ -6,7 +6,10 @@ $password = "minhminh"; //your pasSword
 $database = "gamestore";
 
 //Getting values
-$PID = $_POST[""]
+$Price = $_REQUEST["Price"];
+$ReleaseDate = $_REQUEST["ReleaseDate"];
+$Publisher = $_REQUEST["Publisher"];
+$Quantity = $_REQUEST["Quantity"];
 
 
 //Create connection
@@ -17,14 +20,28 @@ if ($conn->connect_error){
 }else{
     
 }
+/*
+
+if($Publisher==""){
+    echo"true";
+}else{
+    echo"false";
+}
+*/
 
 
 
-$query = "SELECT product_stock.PID, product_details.PName, product_details.ReleaseDate,
-product_details.Price, product_details.Publisher
-FROM product_stock
-INNER JOIN product_details
-ON product_stock.PName=product_details.PName";
+
+
+
+
+/*
+$query = "UPDATE product_details
+SET 
+
+
+WHERE PName='$PName'
+";
 
 
 $result = mysqli_query($conn,$query);
@@ -38,7 +55,7 @@ while ($row = mysqli_fetch_assoc($result)){
 }
 
 //send $data to front end in JSON format
-echo json_encode($data);
+echo json_encode($data);*/
 
     
 

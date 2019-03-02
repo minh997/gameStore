@@ -98,11 +98,11 @@ CREATE TABLE Purchase(
 		ON DELETE Cascade
 		ON UPDATE Cascade,
     FOREIGN KEY(OID) REFERENCES Orders(OID)
-	ON DELETE Cascade
-	ON UPDATE Cascade,
+        ON DELETE Cascade
+        ON UPDATE Cascade,
     FOREIGN KEY(PID) REFERENCES Product_Stock(PID)
-	ON DELETE Cascade
-	ON UPDATE Cascade
+        ON DELETE Cascade
+        ON UPDATE Cascade
 );
 
 CREATE TABLE Employee(		
