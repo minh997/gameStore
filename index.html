@@ -22,6 +22,12 @@
    
     <script>
     
+    function setAtr(ele, attr){
+        for(let i in attr){
+            ele.setAttribute(i, attr[i]);
+        }
+    }
+    
     //send request to server, get data in JSON format, display it in class productTable 
     function ajaxProcess(ajax){
         ajax.onreadystatechange = function(){
@@ -41,20 +47,30 @@
                 let PName = data[i].PName;
                 let Price = data[i].Price;
                 
-
-            //display for each product
-            html += 
-                "<div class = \"productBox\" "+
-                "<figure>"+
-                    "<img src = \"img/" + PID + ".jpg\" class = \"image\" >"+
-                    "<figcaption>" + PName + "<br>" + Price +"</figcaption>"+
-
-                "</figure>" + 
-
-                "</div>"
+                
+                //display each product, attach it to div id = "productTable"
+                let productTable = document.getElementById("productTable");
+            
+                let div1 = document.createElement("div");
+                setAtr(div1,{"class":"productBox"});
+                productTable.appendChild(div1);
+                
+                let figure = document.createElement("figure");
+                div1.appendChild(figure);
+                
+                let img = document.createElement("img");
+                setAtr(img,{"src":"img/"+PID+".jpg","class":"image"});
+                figure.appendChild(img);
+                
+                let figcaption = document.createElement("figcaption");
+                figcaption.appendChild(document.createTextNode(PName));
+                figcaption.appendChild(document.createElement("br"));
+                figcaption.appendChild(document.createTextNode(Price));
+                figure.appendChild(figcaption);
+                
 
             }
-            document.getElementById("productTable").innerHTML = html;
+            
         }
 
     }
