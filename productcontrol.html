@@ -22,6 +22,13 @@
    
     <script>
     
+    //set attribute for ele
+    function setAtr(ele, attr){
+        for(let i in attr){
+            ele.setAttribute(i, attr[i]);
+        }
+    }
+    
     //send request to server, get data in JSON format, display it in class productTable 
     function ajaxProcess(ajax) {
         ajax.onreadystatechange = function ( ){
@@ -37,6 +44,7 @@
             }
 
             for (let i = 0;i< data.length;i++){
+                //Extract data from JSON
                 let PID = data[i].PID;
                 let PName = data[i].PName;
                 let Price = data[i].Price;
@@ -44,7 +52,51 @@
                 let ReleaseDate = data[i].ReleaseDate;
                 let Quantity = data[i].Quantity;
                 
-            
+                let tbody = document.getElementById("productControl");
+                
+                let tr = document.createElement("tr");
+                tbody.appendChild(tr);
+                
+                //fill data in each row
+                let td1 = document.createElement("td");
+                td1.innerHTML = PID;
+                tr.appendChild(td1);
+                
+                let td2 = document.createElement("td");
+                td2.innerHTML = PName;
+                tr.appendChild(td2);
+                
+                let td3 = document.createElement("td");
+                td3.innerHTML = Price;
+                tr.appendChild(td3);
+                
+                let td4 = document.createElement("td");
+                td4.innerHTML = Publisher;
+                tr.appendChild(td4);
+                
+                let td5 = document.createElement("td");
+                td5.innerHTML = ReleaseDate;
+                tr.appendChild(td5);
+                
+                let td6 = document.createElement("td");
+                td6.innerHTML = Quantity;
+                tr.appendChild(td6);
+                
+                let td7 = document.createElement("td");
+                let updateBtn = document.createElement("button");
+                setAtr(updateBtn,{"type":"button","class":"btn btn-primary","data-toggle":"modal", "data-target":"#m"+PID})
+                updateBtn.innerHTML = "Update";
+                td7.appendChild(updateBtn);
+                tr.appendChild(td7);
+                
+                let td8 = document.createElement("td");
+                let deleBtn = document.createElement("button");
+                setAtr(deleBtn,{"type":"button","class":"btn btn-danger"})
+                deleBtn.innerHTML = "Delete";
+                td8.appendChild(deleBtn);
+                tr.appendChild(td8);
+                
+                
             html += 
             "<tr>"+
                 "<td>"+PID+"</td>"+
@@ -84,7 +136,7 @@
             
 
             }
-            document.getElementById("productControl").innerHTML = html;
+            //document.getElementById("productControl").innerHTML = html;
         }
 
     }
