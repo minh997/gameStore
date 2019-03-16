@@ -67,13 +67,20 @@
                             "<span aria-hidden=\"true\">&times;</span>"+       
                             "</button>"+
                             "</div>"+
-                            "<div class=\"modal-body\">"+
+                        "<div class=\"modal-body\">"+
                             "<form>"+
-                                "<input type=\"number\" class=\"form-control my-3\" placeholder=\"Enter new Price\" name=\"Price\">"+
-                                "<input type=\"date\" class=\"form-control my-3\" placeholder=\"Enter new date\" name=\"ReleaseDate\">"+
-                                "<input type=\"text\" class=\"form-control my-3\" placeholder=\"Enter new Publisher\" name=\"Publisher\">"+
-                                "<input type=\"number\" class=\"form-control my-3\" placeholder=\"Enter new Quantity\" name=\"Quantity\">"+
-                                "<input type=\"button\" class=\"btn btn-primary my-3\" onclick=update(\""+"m"+PID+"\") value=\"submit\">"+          
+                                "<p>Price<p>"+
+                                "<input type=\"number\" class=\"form-control my-3\" placeholder=\"Enter new Price\" name=\"Price\" value = \""+Price+"\" >"+
+                                
+                                "<p>Release Date<p>"+
+                                "<input type=\"date\" class=\"form-control my-3\" placeholder=\"Enter new date\" name=\"ReleaseDate\" value = \""+ReleaseDate+"\" >"+
+                
+                                "<p>Publisher<p>"+
+                                "<input type=\"text\" class=\"form-control my-3\" placeholder=\"Enter new Publisher\" name=\"Publisher\" value = \""+Publisher+"\" >"+
+                
+                                "<p>Quantity<p>"+
+                                "<input type=\"number\" class=\"form-control my-3\" placeholder=\"Enter new Quantity\" name=\"Quantity\" value = \""+Quantity+"\" >"+
+                                "<input type=\"button\" class=\"btn btn-primary my-3\" onclick=update(\""+"m"+PID+"\") value=\"submit\">"+      
                             "</form>"+
                         "</div>" +   
                     "</div>"+
@@ -109,12 +116,11 @@
         let Publisher = document.getElementById(ID).getElementsByTagName("input")[2].value;
         let Quantity = document.getElementById(ID).getElementsByTagName("input")[3].value;
         let PName = document.getElementById(ID).getElementsByTagName("h5")[0].innerHTML;
-        
-       
-        //string contain 3 args will be passed to backend
-        let args = "?"+"Price="+Price+"&ReleaseDate="+ReleaseDate+"&Publisher="+Publisher+"&Quantity="+Quantity;
+        let PID = ID.substring(1,4);
         
         
+        //string contain 4 args will be passed to server
+        let args = "?"+"Price="+Price+"&ReleaseDate="+ReleaseDate+"&Publisher="+Publisher+"&Quantity="+Quantity+"&PID="+PID+"&PName="+PName;
         
         let ajax = new XMLHttpRequest();
         let method = "GET";
@@ -126,11 +132,11 @@
             if(this.readyState == 4 && this.status == 200){
                 var data = this.responseText;
                 console.log(data);
-
             }
         
         }
         ajax.send();
+        location.reload(true);
     }
 
     </script>
@@ -139,7 +145,7 @@
 
 <body>
     
-    <div class="banner"></div>
+    
     
     
     

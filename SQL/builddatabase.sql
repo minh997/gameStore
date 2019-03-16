@@ -31,7 +31,6 @@ CREATE TABLE Product_Details(
     Price DOUBLE,
     ReleaseDate DATE,
     Publisher CHAR(50),
-    Developer CHAR(50),
     PRIMARY KEY (PName)
 );
 

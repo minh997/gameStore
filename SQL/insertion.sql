@@ -21,26 +21,26 @@ INSERT INTO City(PostalCode, City) VALUES
 
 /*no single quote in string */
 
-INSERT INTO Product_Details(PName, Price, ReleaseDate, Publisher, Developer) VALUES 
-('Hitman 2', 29.99, '2018-12-2', 'Ubisoft', Null),
-('Starcraft 2', 9.99, '2012-1-1', 'Blizzard', 'Blizzard'),
-('Shadow of Tombraider', 24.99, '2018-9-14','Ubisoft',Null),
-('FIFA 19', 24.99, '2018-9-15','EA', null),
-('Diablo 3', 12.99, '2012-6-1', 'Blizzard', 'Blizzard'),
-('Life is Strange', 38.99, '2017-8-1', 'Ubisoft', Null),
-('Assassin Creed Odyssey', 28.99, '2018-10-5', 'Ubisoft', null),
-('The Messenger', 10.99, '2018-8-30', 'Sabotage', null),
-('Below', 12.49, '2018-12-14', 'Indie', null),
-('Call Of Duty', 28.99, '2018-10-12', 'Ubisoft', null),
-('Super Mario Bros', 49.99, '2018-12-7','Nintedo',null),
-('Marvel SpiderMan', 28.45, '2018-12-7', 'Sony', null),
-('Red Dead Redemption 2', 68.99, '2018-10-26', 'RockStar Game', null),
-('GTA 5', 32.99, '2013-9-17','RockStar Game', null),
+INSERT INTO Product_Details(PName, Price, ReleaseDate, Publisher) VALUES 
+('Hitman 2', 29.99, '2018-12-2', 'Ubisoft'),
+('Starcraft 2', 9.99, '2012-1-1', 'Blizzard' ),
+('Shadow of Tombraider', 24.99, '2018-9-14','Ubisoft'),
+('FIFA 19', 24.99, '2018-9-15','EA'),
+('Diablo 3', 12.99, '2012-6-1', 'Blizzard' ),
+('Life is Strange', 38.99, '2017-8-1', 'Ubisoft'),
+('Assassin Creed Odyssey', 28.99, '2018-10-5', 'Ubisoft'),
+('The Messenger', 10.99, '2018-8-30', 'Sabotage'),
+('Below', 12.49, '2018-12-14', 'Indie'),
+('Call Of Duty', 28.99, '2018-10-12', 'Ubisoft'),
+('Super Mario Bros', 49.99, '2018-12-7','Nintedo'),
+('Marvel SpiderMan', 28.45, '2018-12-7', 'Sony'),
+('Red Dead Redemption 2', 68.99, '2018-10-26', 'RockStar Game'),
+('GTA 5', 32.99, '2013-9-17','RockStar Game'),
 
 
-('Playstation 4', 379, '2011-1-4', 'Sony', Null),
-('Wii', 199, '2010-3-15', 'Foxconn', Null),
-('Nintedo Switch', 377.99, '2017-8-2','Nintedo', null);
+('Playstation 4', 379, '2011-1-4', 'Sony'),
+('Wii', 199, '2010-3-15', 'Foxconn'),
+('Nintedo Switch', 377.99, '2017-8-2','Nintedo');
 
 
 
