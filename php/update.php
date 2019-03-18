@@ -14,6 +14,7 @@ $PID = $_REQUEST["PID"];
 $PName = $_REQUEST["PName"];
 
 
+
 //Create connection
 $conn = new mysqli ($servername, $username, $password, $database);
 //Check connection
@@ -23,11 +24,14 @@ if ($conn->connect_error){
 
 
 
-$query = "UPDATE product_details
-SET Price = $Price
+$query = "UPDATE product_details, product_stock
+SET product_details.Price = $Price,
+product_details.ReleaseDate = '$ReleaseDate',
+product_details.Publisher = '$Publisher',
+product_stock.Quantity = $Quantity
+WHERE product_stock.PName = product_details.PName AND product_details.PName ='$PName' ;
 
 
-WHERE PName ='$PName'
 ";
 
 if($conn->query($query) === TRUE){

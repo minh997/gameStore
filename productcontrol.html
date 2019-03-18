@@ -143,7 +143,7 @@
             
 
             }
-            //document.getElementById("productControl").innerHTML = html;
+            document.getElementById("productControl").innerHTML = html;
         }
 
     }
@@ -182,13 +182,16 @@
         ajax.open(method, url, async);
         ajax.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
-                var data = this.responseText;
-                console.log(data);
+                data = this.responseText;
+                if(!alert(data)){
+                    location.reload(true);
+                }
             }
         
         }
         ajax.send();
-        location.reload(true);
+        
+        
     }
 
     </script>
@@ -233,6 +236,10 @@
             <script>display()</script>
         </tbody>
     </table>
+    
+    <button type="button" class="btn btn-success"> Add </button>
+    <hr>
+    <h1>Data</h1>
     
     
     
