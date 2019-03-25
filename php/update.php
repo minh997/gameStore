@@ -12,6 +12,8 @@ $Publisher = $_REQUEST["Publisher"];
 $Quantity = $_REQUEST["Quantity"];
 $PID = $_REQUEST["PID"];
 $PName = $_REQUEST["PName"];
+$command = $_REQUEST["command"];
+
 
 
 
@@ -22,23 +24,35 @@ if ($conn->connect_error){
     die("Connection failed: " . $conn->connect_error);
 }
 
+if($command === 'update'){
+    $query = "UPDATE Product_Details, Product_Stock
+    SET Product_Details.Price = $Price,
+    Product_Details.ReleaseDate = '$ReleaseDate',
+    Product_Details.Publisher = '$Publisher',
+    Product_Stock.Quantity = $Quantity
+    WHERE Product_Stock.PName = Product_Details.PName AND Product_Details.PName ='$PName' ";
 
+    if($conn->query($query) === TRUE){
+        echo "$PName Updated";
+    }else{
+        echo "error: ".$conn->error;
+    }
 
-$query = "UPDATE product_details, product_stock
-SET product_details.Price = $Price,
-product_details.ReleaseDate = '$ReleaseDate',
-product_details.Publisher = '$Publisher',
-product_stock.Quantity = $Quantity
-WHERE product_stock.PName = product_details.PName AND product_details.PName ='$PName' ;
-
-
-";
-
-if($conn->query($query) === TRUE){
-    echo "Record Updated";
-}else{
-    echo "error: ".$conn->error;
+}elseif($command === 'delete'){
+    $query = "DELETE FROM Product_Details
+    WHERE PName = '$PName'";
+    
+    if($conn->query($query) === TRUE){
+        echo "Deleted $PName";
+    }else{
+        echo "error: ".$conn->error;
+    }
 }
+
+
+
+
+
 $conn->close();
     
 
