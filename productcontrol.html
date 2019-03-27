@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -190,6 +190,41 @@
         ajax.send();
 
     }
+        
+    function boughtByAll(){
+       
+        
+        let ajax = new XMLHttpRequest();
+        let method = "GET";
+        let url = "php/buyall.php";//php code
+        let async = true; 
+        
+        
+        
+        
+        ajax.open(method, url, async);
+        ajax.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                data = JSON.parse(this.responseText);
+                console.log(data);
+                html = "";
+                let display = document.getElementById("boughtByAll");
+                for (let i = 0;i< data.length;i++){
+                    let PName = data[i].PName;
+                    html = html + PName;
+                }
+                display.innerHTML = html;
+            }
+        }
+        
+    
+        ajax.send();
+    }
+        
+    boughtByAll();
+        
+    
+
 
     </script>
     
@@ -216,6 +251,7 @@
       </ul>
     </nav>
     
+   <!-- table for product-->
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
@@ -233,41 +269,48 @@
             <script>display()</script>
         </tbody>
     </table>
-    
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#adddata"> Add </button>
     <hr>
     
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#adddata"> Add </button>
     
-<!--form add new data  -->
-<div class="modal fade" id="adddata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-   <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title">Add new game</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <div class="modal-body">
-            <p>Name</p>
-            <input type="text" class = "form-control my-3">
-            <p>ID</p>
-            <input type="number" class = "form-control my-3">
-            <p>Release Date</p>
-            <input type="date" class = "form-control my-3">
-            <p>Publisher</p>
-            <input type="text" class = "form-control my-3">
-            <p>Quantity</p>
-            <input type="number" class = "form-control my-3">
-            <p>Price</p>
-            <input type="number" class = "form-control my-3">
-            <button class="btn btn-primary" onclick="add()">Submit</button>
-         </div>
-      </div>
-   </div>
-</div>
     
-    <h1>Data</h1>
+    
+    <!--form add new data  -->
+    <div class="modal fade" id="adddata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+       <div class="modal-dialog" role="document">
+          <div class="modal-content">
+             <div class="modal-header">
+                <h5 class="modal-title">Add new game</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+             </div>
+             <div class="modal-body">
+                <p>Name</p>
+                <input type="text" class = "form-control my-3">
+                <p>ID</p>
+                <input type="number" class = "form-control my-3">
+                <p>Release Date</p>
+                <input type="date" class = "form-control my-3">
+                <p>Publisher</p>
+                <input type="text" class = "form-control my-3">
+                <p>Quantity</p>
+                <input type="number" class = "form-control my-3">
+                <p>Price</p>
+                <input type="number" class = "form-control my-3">
+                <button class="btn btn-primary" onclick="add()">Submit</button>
+             </div>
+          </div>
+       </div>
+    </div>
+    
+ <!--   open average product price table-->
+    <br><br>
+    <button type="button" class="btn btn-success" onclick="window.location.href = 'php/AvgProdPrice.php'"> Average Product Price </button>
+    <br><br>
+
+    <h4>Product bought by all customer: </h4>
+    <h4 id="boughtByAll"></h4>
     
     
     
