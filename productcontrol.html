@@ -192,15 +192,10 @@
     }
         
     function boughtByAll(){
-       
-        
         let ajax = new XMLHttpRequest();
         let method = "GET";
         let url = "php/buyall.php";//php code
         let async = true; 
-        
-        
-        
         
         ajax.open(method, url, async);
         ajax.onreadystatechange = function(){
@@ -220,11 +215,56 @@
     
         ajax.send();
     }
+    
+    function findMax(){
+        let ajax = new XMLHttpRequest();
+        let method = "GET";
+        let url = "php/findMax.php";//php code
+        let async = true; 
         
-    boughtByAll();
+        ajax.open(method, url, async);
+        ajax.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                data = JSON.parse(this.responseText);
+                console.log(data);
+                html = "";
+                let display = document.getElementById("boughtByAll");
+                for (let i = 0;i< data.length;i++){
+                    let PName = data[i].PName;
+                    html = html + PName;
+                }
+                display.innerHTML = html;
+            }
+        }
         
     
-
+        ajax.send();
+    }    
+        
+    function totalNetWorth(){
+        let ajax = new XMLHttpRequest();
+        let method = "GET";
+        let url = "php/totalNetWorth.php";//php code
+        let async = true; 
+        
+        ajax.open(method, url, async);
+        ajax.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                data = JSON.parse(this.responseText);
+                console.log(data);
+                html = "";
+                let display = document.getElementById("boughtByAll");
+                for (let i = 0;i< data.length;i++){
+                    let sum = data[i].sum;
+                    html = html + "$ " + sum 
+                }
+                display.innerHTML = html;
+            }
+        }
+        
+    
+        ajax.send();
+    }
 
     </script>
     
@@ -272,7 +312,7 @@
     <hr>
     
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#adddata"> Add </button>
-    
+    <hr>
     
     
     <!--form add new data  -->
@@ -306,14 +346,19 @@
     
  <!--   open average product price table-->
     <br><br>
-    <button type="button" class="btn btn-success" onclick="window.location.href = 'php/AvgProdPrice.php'"> Average Product Price </button>
+    <button type="button" class="btn btn-success" onclick="window.location.href = 'php/AvgProdPrice.php'"> Average Product Price by Publisher </button>
     <br><br>
+    
+    <div class="buttonBox">
+        <button class="btn btn-info mt-2" onclick="boughtByAll()">Find product bought by all customer</button>
 
-    <h4>Product bought by all customer: </h4>
-    <h4 id="boughtByAll"></h4>
+
+        <button onclick="findMax()" class="btn btn-info mt-2">Find Most Expensive Product</button>
+
+        <button onclick="totalNetWorth()" class="btn btn-info mt-2">Total Product in Stock worth</button>
+    </div>
     
-    
-    
+    <h4 class="border border-primary mt-3" id="boughtByAll">result display here</h4>
     
     
 
