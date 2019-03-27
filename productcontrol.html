@@ -110,7 +110,7 @@
     function display(){
         let ajax = new XMLHttpRequest();
         let method = "GET";
-        let url = "php/showAllProduct.php";//php code
+        let url = "php/showAllProductMoreDetail.php";//php code
         let async = true; 
         
         
@@ -350,12 +350,12 @@
     <br><br>
     
     <div class="buttonBox">
-        <button class="btn btn-info mt-2" onclick="boughtByAll()">Find product bought by all customer</button>
+        <button class="btn btn-info m-2" onclick="boughtByAll()">Find product bought by all customer</button>
 
 
-        <button onclick="findMax()" class="btn btn-info mt-2">Find Most Expensive Product</button>
+        <button onclick="findMax()" class="btn btn-info m-2">Find Most Expensive Product</button>
 
-        <button onclick="totalNetWorth()" class="btn btn-info mt-2">Total Product in Stock worth</button>
+        <button onclick="totalNetWorth()" class="btn btn-info m-2">Total Product in Stock worth</button>
     </div>
     
     <h4 class="border border-primary mt-3" id="boughtByAll">result display here</h4>

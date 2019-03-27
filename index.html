@@ -40,7 +40,7 @@
             if(data.length == 0){
                 return;
             }
-
+            document.getElementById("productTable").innerHTML = "";
             for (let i = 0;i< data.length;i++){
                 let PID = data[i].PID;
                 let PName = data[i].PName;
@@ -72,7 +72,7 @@
             
         }
 
-    }
+        }
     }
     
     function display(){
@@ -108,17 +108,77 @@
         ajax.open(method, url, async);
         ajax.send();
     }
+        
+    function showmore(){
+        let ajax = new XMLHttpRequest();
+        let method = "GET";
+        let url = "php/showAllProductMoreDetail.php";//php code
+        let async = true; 
+        
+        
+        ajax.open(method, url, async);
+        ajax.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            var data = JSON.parse(this.responseText);
+            console.log(data);
+
+            let html = "";
+
+            if(data.length == 0){
+                return;
+            }
+            document.getElementById("productTable").innerHTML = "";
+            for (let i = 0;i< data.length;i++){
+                let PID = data[i].PID;
+                let PName = data[i].PName;
+                let Price = data[i].Price;
+                let ReleaseDate = data[i].ReleaseDate;
+                let Publisher = data[i].Publisher;
+                
+                //display each product, attach it to div id = "productTable"
+                let productTable = document.getElementById("productTable");
+                
+            
+                let div1 = document.createElement("div");
+                setAtr(div1,{"class":"productBox"});
+                productTable.appendChild(div1);
+                
+                let figure = document.createElement("figure");
+                div1.appendChild(figure);
+                
+                let img = document.createElement("img");
+                setAtr(img,{"src":"img/"+PID+".jpg","class":"image"});
+                figure.appendChild(img);
+                
+                let figcaption = document.createElement("figcaption");
+                figcaption.appendChild(document.createTextNode(PName));
+                figcaption.appendChild(document.createElement("br"));
+                figcaption.appendChild(document.createTextNode(Price));
+                figcaption.appendChild(document.createElement("br"));
+                figcaption.appendChild(document.createTextNode(ReleaseDate));
+                figcaption.appendChild(document.createElement("br"));            
+                figcaption.appendChild(document.createTextNode(Publisher));
+
+                figure.appendChild(figcaption);
+                
+
+            }
+            
+        }
+
+        }
+        
+        
+        ajax.send();
+    }
 
     </script>
     
 </head>
 
-<body>
+<body> 
     
     <div class="banner"></div>
-    
-    
-    
     
     <nav class="navbar navbar-expand-sm bg-primary navbar-dark sticky-top">
       <ul class="navbar-nav">
@@ -135,12 +195,16 @@
     </nav>
     
     
-    <form >
+    <form class="m-3">
         
         <input type="text" name="PName" id="PName" placeholder="Enter product name here" class=""> 
         <button type="button" class="btn btn-primary mb-2" onclick=search()>Find</button>
-     
+        <br>
     </form>
+    
+    <button onclick="showmore()" class="btn btn-outline-secondary">Show more Detail</button>
+        <button onclick="display()" class="btn btn-outline-secondary">Show less</button>
+    
     
     
     
