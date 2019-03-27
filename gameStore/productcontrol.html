@@ -150,45 +150,6 @@
         
         
     }
-        
-    function add(){
-        let PName = document.getElementById("adddata").getElementsByTagName("input")[0].value;
-        
-        let PID = document.getElementById("adddata").getElementsByTagName("input")[1].value;
-        
-        let ReleaseDate = document.getElementById("adddata").getElementsByTagName("input")[2].value;
-        
-        let Publisher = document.getElementById("adddata").getElementsByTagName("input")[3].value;
-        
-        
-        let Quantity = document.getElementById("adddata").getElementsByTagName("input")[4].value;
-        
-        let Price = document.getElementById("adddata").getElementsByTagName("input")[4].value;
-
-        
-        let args = "?"+"Price="+Price+"&ReleaseDate="+ReleaseDate+"&Publisher="+Publisher+"&Quantity="+Quantity+"&PID="+PID+"&PName="+PName+"&PID="+PID;
-        
-        let ajax = new XMLHttpRequest();
-        let method = "GET";
-        let url = "php/addProduct.php"+args;//php code
-        let async = true; 
-        
-        
-        
-        ajax.open(method, url, async);
-        ajax.onreadystatechange = function(){
-            if(this.readyState == 4 && this.status == 200){
-                data = this.responseText;
-                console.log(data);
-                if(!alert(data)){
-                    location.reload(true);
-                }
-            }
-        
-        }
-        ajax.send();
-
-    }
 
     </script>
     
@@ -258,9 +219,7 @@
           <input type="text" class = "form-control my-3">
           <p>Quantity</p>
           <input type="number" class = "form-control my-3">
-          <p>Price</p>
-          <input type="number" class = "form-control my-3">
-          <button class="btn btn-primary" onclick="add()">Submit</button>
+          <button>Submit</button>
 
 
           
