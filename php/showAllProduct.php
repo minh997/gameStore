@@ -20,11 +20,11 @@ if ($conn->connect_error){
 
 
 
-$query = "SELECT product_stock.PID, product_details.PName, product_details.ReleaseDate,
-product_details.Price, product_details.Publisher, product_stock.Quantity
-FROM product_stock
-INNER JOIN product_details
-ON product_stock.PName=product_details.PName";
+$query = "SELECT Product_Stock.PID, Product_Details.PName, Product_Details.ReleaseDate,
+Product_Details.Price, Product_Details.Publisher, Product_Stock.Quantity
+FROM Product_Stock
+INNER JOIN Product_Details
+ON Product_Stock.PName=Product_Details.PName";
 
 
 $result = mysqli_query($conn,$query);

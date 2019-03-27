@@ -18,12 +18,12 @@ if ($conn->connect_error){
     
 }
 
-$query = "SELECT product_stock.PID, product_details.PName, product_details.ReleaseDate,
-product_details.Price
-FROM product_stock
-INNER JOIN product_details
-ON product_stock.PName=product_details.PName
-WHERE product_stock.PName LIKE '%$PName%'";
+$query = "SELECT Product_Stock.PID, Product_Details.PName, Product_Details.ReleaseDate,
+Product_Details.Price
+FROM Product_Stock
+INNER JOIN Product_Details
+ON Product_Stock.PName=Product_Details.PName
+WHERE Product_Stock.PName LIKE '%$PName%'";
 $result = mysqli_query($conn,$query);
 
 

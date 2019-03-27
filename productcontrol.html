@@ -44,7 +44,7 @@
             }
 
             for (let i = 0;i< data.length;i++){
-                //Extract data from JSON
+                //Extract data from response
                 let PID = data[i].PID;
                 let PName = data[i].PName;
                 let Price = data[i].Price;
@@ -52,49 +52,6 @@
                 let ReleaseDate = data[i].ReleaseDate;
                 let Quantity = data[i].Quantity;
                 
-                let tbody = document.getElementById("productControl");
-                
-                let tr = document.createElement("tr");
-                tbody.appendChild(tr);
-                
-                //fill data in each row
-                let td1 = document.createElement("td");
-                td1.innerHTML = PID;
-                tr.appendChild(td1);
-                
-                let td2 = document.createElement("td");
-                td2.innerHTML = PName;
-                tr.appendChild(td2);
-                
-                let td3 = document.createElement("td");
-                td3.innerHTML = Price;
-                tr.appendChild(td3);
-                
-                let td4 = document.createElement("td");
-                td4.innerHTML = Publisher;
-                tr.appendChild(td4);
-                
-                let td5 = document.createElement("td");
-                td5.innerHTML = ReleaseDate;
-                tr.appendChild(td5);
-                
-                let td6 = document.createElement("td");
-                td6.innerHTML = Quantity;
-                tr.appendChild(td6);
-                
-                let td7 = document.createElement("td");
-                let updateBtn = document.createElement("button");
-                setAtr(updateBtn,{"type":"button","class":"btn btn-primary","data-toggle":"modal", "data-target":"#m"+PID})
-                updateBtn.innerHTML = "Update";
-                td7.appendChild(updateBtn);
-                tr.appendChild(td7);
-                
-                let td8 = document.createElement("td");
-                let deleBtn = document.createElement("button");
-                setAtr(deleBtn,{"type":"button","class":"btn btn-danger"})
-                deleBtn.innerHTML = "Delete";
-                td8.appendChild(deleBtn);
-                tr.appendChild(td8);
                 
                 
             html += 
@@ -106,7 +63,7 @@
                 "<td>"+Publisher+"</td>"+
                 "<td>"+Quantity+"</td>"+
                 "<td><button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#"+"m"+PID +"\">Update</button<td>"+
-                "<td><button type=\"button\" class=\"btn btn-danger\">Delete</button></td>"+
+                "<td><button type=\"button\" class=\"btn btn-danger\"  onclick=update(\""+"m"+PID+"\",\"delete\")  >Delete</button></td>"+
             "</tr>"+
             
             /*each model habe ID = m+PID by default*/
@@ -132,7 +89,7 @@
                 
                                 "<p>Quantity<p>"+
                                 "<input type=\"number\" class=\"form-control my-3\" placeholder=\"Enter new Quantity\" name=\"Quantity\" value = \""+Quantity+"\" >"+
-                                "<input type=\"button\" class=\"btn btn-primary my-3\" onclick=update(\""+"m"+PID+"\") value=\"submit\">"+      
+                                "<input type=\"button\" class=\"btn btn-primary my-3\" onclick=update(\""+"m"+PID+"\",\"update\") value=\"submit\">"+      
                             "</form>"+
                         "</div>" +   
                     "</div>"+
@@ -162,7 +119,7 @@
     
     }
         
-    function update(ID){
+    function update(ID, command){
         let Price = document.getElementById(ID).getElementsByTagName("input")[0].value;
         let ReleaseDate = document.getElementById(ID).getElementsByTagName("input")[1].value;
         let Publisher = document.getElementById(ID).getElementsByTagName("input")[2].value;
@@ -172,7 +129,7 @@
         
         
         //string contain 4 args will be passed to server
-        let args = "?"+"Price="+Price+"&ReleaseDate="+ReleaseDate+"&Publisher="+Publisher+"&Quantity="+Quantity+"&PID="+PID+"&PName="+PName;
+        let args = "?"+"Price="+Price+"&ReleaseDate="+ReleaseDate+"&Publisher="+Publisher+"&Quantity="+Quantity+"&PID="+PID+"&PName="+PName+"&command="+command;
         
         let ajax = new XMLHttpRequest();
         let method = "GET";
@@ -192,6 +149,45 @@
         ajax.send();
         
         
+    }
+        
+    function add(){
+        let PName = document.getElementById("adddata").getElementsByTagName("input")[0].value;
+        
+        let PID = document.getElementById("adddata").getElementsByTagName("input")[1].value;
+        
+        let ReleaseDate = document.getElementById("adddata").getElementsByTagName("input")[2].value;
+        
+        let Publisher = document.getElementById("adddata").getElementsByTagName("input")[3].value;
+        
+        
+        let Quantity = document.getElementById("adddata").getElementsByTagName("input")[4].value;
+        
+        let Price = document.getElementById("adddata").getElementsByTagName("input")[4].value;
+
+        
+        let args = "?"+"Price="+Price+"&ReleaseDate="+ReleaseDate+"&Publisher="+Publisher+"&Quantity="+Quantity+"&PID="+PID+"&PName="+PName+"&PID="+PID;
+        
+        let ajax = new XMLHttpRequest();
+        let method = "GET";
+        let url = "php/addProduct.php"+args;//php code
+        let async = true; 
+        
+        
+        
+        ajax.open(method, url, async);
+        ajax.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                data = this.responseText;
+                console.log(data);
+                if(!alert(data)){
+                    location.reload(true);
+                }
+            }
+        
+        }
+        ajax.send();
+
     }
 
     </script>
@@ -237,10 +233,43 @@
         </tbody>
     </table>
     
-    <button type="button" class="btn btn-success"> Add </button>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#adddata"> Add </button>
     <hr>
     <h1>Data</h1>
     
+    
+    <div class="modal fade" id="adddata" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add new game</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p>Name</p>
+          <input type="text" class = "form-control my-3">
+          <p>ID</p>
+          <input type="number" class = "form-control my-3">
+          <p>Release Date</p>
+          <input type="date" class = "form-control my-3">
+          <p>Publisher</p>
+          <input type="text" class = "form-control my-3">
+          <p>Quantity</p>
+          <input type="number" class = "form-control my-3">
+          <p>Price</p>
+          <input type="number" class = "form-control my-3">
+          <button class="btn btn-primary" onclick="add()">Submit</button>
+
+
+          
+          
+      </div>
+      
+    </div>
+  </div>
+</div>
     
     
     
