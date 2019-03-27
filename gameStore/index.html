@@ -38,7 +38,6 @@
             let html = "";
 
             if(data.length == 0){
-                html = "Find 0 result";
                 return;
             }
 
@@ -96,7 +95,7 @@
          
         let PName = document.getElementById("PName").value;
         let productDisplay = document.getElementById("productTable");
-        productDisplay.innerHTML = "Find 0 result";
+        productDisplay.innerHTML = "";
         
         
         let ajax = new XMLHttpRequest();
