@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>TEST</title>
+    <title>Game Store</title>
     <meta charset="utf-8">
     
     <!-- Latest compiled and minified CSS -->
@@ -34,9 +34,7 @@
         if(this.readyState == 4 && this.status == 200){
             var data = JSON.parse(this.responseText);
             console.log(data);
-
             let html = "";
-
             if(data.length == 0){
                 return;
             }
@@ -67,11 +65,9 @@
                 figcaption.appendChild(document.createTextNode(Price));
                 figure.appendChild(figcaption);
                 
-
             }
             
         }
-
         }
     }
     
@@ -86,9 +82,7 @@
         ajaxProcess(ajax);
         ajax.send();
         
-
         
-
     }
         
     function search(){
@@ -121,9 +115,7 @@
         if(this.readyState == 4 && this.status == 200){
             var data = JSON.parse(this.responseText);
             console.log(data);
-
             let html = "";
-
             if(data.length == 0){
                 return;
             }
@@ -158,20 +150,16 @@
                 figcaption.appendChild(document.createTextNode(ReleaseDate));
                 figcaption.appendChild(document.createElement("br"));            
                 figcaption.appendChild(document.createTextNode(Publisher));
-
                 figure.appendChild(figcaption);
                 
-
             }
             
         }
-
         }
         
         
         ajax.send();
     }
-
     </script>
     
 </head>
@@ -187,6 +175,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="productcontrol.html">Product Control</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="Employee.html">Employees</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="order.html">Order</a>
